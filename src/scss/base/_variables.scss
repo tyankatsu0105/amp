@@ -1,0 +1,39 @@
+//====================================================
+//  typography
+//====================================================
+
+$baseFontFamily: 'Noto Sans Japanese', Meiryo, メイリオ, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Montserrat, Roboto, sans-serif;
+$subFontFamily: 'Montserrat','Roboto', sans-serif;
+
+
+//====================================================
+//  colors
+//====================================================
+$base:      #ffffff;
+$sub:       #333333;
+$accent:    #67bae8;
+
+
+//====================================================
+//  breakpoints
+//====================================================
+
+
+//iPhoneのポートレート（縦向き）	320px	デフォルトのCSS
+//iPhoneのランドスケープ（横向き）	480px
+//iPadのポートレート	768px
+$smallBreak: 767px;
+$mediumBreak: 992px;
+
+
+@mixin xs() {
+  @media screen and (max-width: $smallBreak) {
+    @content;
+  }
+}
+
+@mixin sm() {
+  @media screen and (min-width: $mediumBreak) {
+    @content;
+  }
+}
