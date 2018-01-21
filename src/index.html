@@ -7,88 +7,95 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <!-- 連続した数字があると誤認識してしまうので、電話番号の自動リンク機能は停止させます。 -->
     <meta name="format-detection" content="telephone=no">
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "NewsArticle",
-        "headline": "Welcome to the mobile web",
-        "image": {
-          "@type": "ImageObject",
-          "url": "http://192.168.11.3:3000/img/common/logo.png",
-          "height": 400,
-          "width": 800
-        },
-      }
-    </script>
     <style amp-custom><!-- inject-style src="./css/index.css" --></style>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
-    <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
-    <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
-    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway">
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
   </head>
   <body>
-    <!-- <header class="headerbar">
-      <a href="homepage.html">
-        <amp-img class="home-button" src="./src/img/common/logo.png" width="36" height="36"></amp-img>
-      </a>
-      <div class="site-name">News Site</div>
-    </header> -->
-    <header class="headerbar">
-      <div role="button" on="tap:sidebar1.toggle" tabindex="0" class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span></div>
-    </header>
-    <amp-sidebar id="sidebar1" layout="nodisplay" side="left">
-      <div role="button" aria-label="close sidebar" on="tap:sidebar1.toggle" tabindex="0" class="close-sidebar">✕</div>
-      <ul class="sidebar">
-        <li><a href="#">Example 1</a></li>
-        <li><a href="#">Example 2</a></li>
-        <li><a href="#">Example 3</a></li>
-      </ul>
-    </amp-sidebar>
-    <h1>Welcome to the mobile web</h1>
-    <amp-img src="./img/common/logo.png" alt="ロゴ" height="400" width="800" layout="responsive"></amp-img>
-      <amp-youtube data-videoid="npum8JsITQE" layout="responsive" width="480" height="270">
-        <div fallback>
-          <p>The video could not be loaded.</p>
+      <amp-state id="buttonChange">
+          <script type="application/json">
+            {
+              "classes": {
+                "default": "default",
+                "active": "active"
+              },
+              "hidden": {
+                "visible": false,
+                "hidden": true
+              },
+              "text": {
+                "dummy": "ダミーテキストです。",
+                "dummy2": "ダミーテキスト２です。"
+              },
+              "width": {
+                "default": 400,
+                "change": 600
+              },
+              "height": {
+                "default": 800,
+                "change": 200
+              }
+            }
+          </script>
+        </amp-state>
+        <div class="container" [class]="hoge" [hidden]="hoge2">
+          <p>ボタンを押すと、要素を変更することができます。</p>
+          <p>class,text,hiddenが指定できます。付いていたクラスは削除されます</p>
+          <p>width,heightがAMPエレメントのみに有効です。</p>
+          <p [text]="hoge3">テキストが変わる所</p>
         </div>
-      </amp-youtube>
-      <amp-twitter width="486" height="657" layout="responsive" data-tweetid="638793490521001985"></amp-twitter>
-      <amp-fit-text width="400" height="75" layout="responsive" max-font-size="42">
-        Big, bold article quote goes here.
-      </amp-fit-text>
-      <amp-fit-text width="400" height="75" layout="responsive" max-font-size="42">
-        Hello!
-      </amp-fit-text>
-      <amp-fit-text width="400" height="75" layout="responsive" max-font-size="42">
-        And the Raven, never flitting, still is sitting, still is sitting. On the pallid bust of Pallas just above my chamber door; And his eyes have all the seeming of a demon’s that is dreaming, And the lamp-light o’er him streaming throws his shadow on the floor; And my soul from out that shadow that lies floating on the floor. Shall be lifted—nevermore!
-     </amp-fit-text>
-     <amp-carousel layout="fixed-height" height="168" type="carousel" >
-      <amp-img src="./img/dummy/img1.jpg" width="300" height="168"></amp-img>
-      <amp-img src="./img/dummy/img2.jpg" width="300" height="168"></amp-img>
-      <amp-img src="./img/dummy/img3.jpg" width="300" height="168"></amp-img>
-      <amp-img src="./img/dummy/img1.jpg" width="300" height="168"></amp-img>
-      <amp-img src="./img/dummy/img2.jpg" width="300" height="168"></amp-img>
-      <amp-img src="./img/dummy/img1.jpg" width="300" height="168"></amp-img>
-    </amp-carousel>
-    <amp-carousel layout="fixed-height" height="168" type="slides" loop autoplay delay="2000">
-      <amp-img src="./img/dummy/img1.jpg" width="300" height="168" layout="responsive"></amp-img>
-      <amp-img src="./img/dummy/img2.jpg" width="300" height="168" layout="responsive"></amp-img>
-      <amp-img src="./img/dummy/img3.jpg" width="300" height="168" layout="responsive"></amp-img>
-    </amp-carousel>
-    <amp-carousel layout="fixed-height" height="250" type="carousel">
-      <amp-img src="./img/common/noimage.jpg" width="300" height="250"></amp-img>
-      <amp-ad width="300" height="250" type="doubleclick" data-slot="/35096353/amptesting/image/static">
-        <div placeholder>This ad is still loading.</div>
-      </amp-ad>
-      <amp-fit-text width="300" height="250" layout="fixed">
-        Big, bold article quote goes here.
-      </amp-fit-text>
-    </amp-carousel>
+        <amp-img [width]="hoge4" src="./img/dummy/img1.jpg" width="100" height="100"></amp-img>
+        <amp-img [height]="hoge5" src="./img/dummy/img1.jpg" width="100" height="100"></amp-img>
+        <button on="tap:AMP.setState(
+          {
+            hoge: buttonChange['classes']['active']
+          }
+          )">クラスをactiveに</button>
+        <button on="tap:AMP.setState(
+          {
+            hoge: buttonChange['classes']['default']
+          }
+          )">クラスをdefaultに</button>
+          <button on="tap:AMP.setState(
+            {
+              hoge2: buttonChange['hidden']['hidden']
+            }
+            )">要素を消す</button>
+            <button on="tap:AMP.setState(
+          {
+            hoge2: buttonChange['hidden']['visible']
+          }
+          )">要素を出現</button>
+          <button on="tap:AMP.setState(
+          {
+            hoge3: buttonChange['text']['dummy']
+          }
+          )">テキスト変更1</button>
+          <button on="tap:AMP.setState(
+          {
+            hoge3: buttonChange['text']['dummy2']
+          }
+          )">テキスト変更2</button>
+          <button on="tap:AMP.setState(
+          {
+            hoge4: buttonChange['width']['default']
+          }
+          )">横幅変更1</button>
+          <button on="tap:AMP.setState(
+          {
+            hoge4: buttonChange['width']['change']
+          }
+          )">横幅変更2</button>
+          <button on="tap:AMP.setState(
+          {
+            hoge5: buttonChange['height']['default']
+          }
+          )">高さ変更1</button>
+          <button on="tap:AMP.setState(
+          {
+            hoge5: buttonChange['height']['change']
+          }
+          )">高さ変更2</button>
   </body>
 </html>
