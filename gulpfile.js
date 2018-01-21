@@ -37,7 +37,7 @@ gulp.task('img-min', function () {
 			imagemin.gifsicle({
 				interlaced: true,
 				// 圧縮レベル1~3
-				optimizationLevel: 1
+				optimizationLevel: 2
 			}),
 			imagemin.jpegtran({
 				progressive: true,
@@ -126,7 +126,7 @@ gulp.task('default', function (callback) {
 	);
 });
 
-// 
+// 製品化
 // --------------------------------------------
 gulp.task('product', function (callback) {
 	return runSequence(
