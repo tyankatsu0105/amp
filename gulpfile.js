@@ -62,8 +62,7 @@ gulp.task('img-min', function () {
 // Sass
 // --------------------------------------------
 gulp.task('sass', function () {
-	gulp.src([SCSS_FILE])
-		.pipe(cache('sass'))
+	return gulp.src([SCSS_FILE])
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
@@ -71,6 +70,7 @@ gulp.task('sass', function () {
 			outputStyle: 'compressed'
 		}))
 		.pipe(autoprefixer())
+		.pipe(cache('sass'))
 		.pipe(gulp.dest(CSS_DEST))
 		.pipe(browserSync.stream());
 });
