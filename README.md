@@ -13,7 +13,6 @@ amp-boilerplateはgulp@4を用いたampサイト構築の雛形です
   - [command](#command)
   - [role of application](#role-of-application)
     - [gulp v4](#gulp-v4)
-    - [webpack v4](#webpack-v4)
     - [prettier](#prettier)
     - [stylelint](#stylelint)
 - [Rule](#rule)
@@ -82,13 +81,6 @@ npm start
 
 タスクランナーです。
 `gulpfile.js`の記述を元に動きます。  
-設定パスを変更する時は`config.json`を編集して下さい。
-
-### webpack v4
-<sub><sup>[back to contents](#contents)</sup></sub>
-
-バンドラーです。
-`webpack.config.js`の記述を元に動きます。  
 設定パスを変更する時は`config.json`を編集して下さい。
 
 ### prettier
