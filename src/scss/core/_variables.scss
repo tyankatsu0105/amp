@@ -1,0 +1,118 @@
+// ===========================================
+//  breakpoints
+// ===========================================
+$xs-min-size: 320px;
+$sm-min-size: 768px;
+$md-min-size: 1080px;
+$lg-min-size: 1300px;
+$xl-min-size: 9999px;
+
+$xs-break: $sm-min-size - 1px;
+$sm-break: $md-min-size - 1px;
+$md-break: $lg-min-size - 1px;
+
+// 対象サイズ未満のみ
+// --------------------------------------------------
+@mixin lt-xxs() {
+  @media screen and (max-width: $xs-min-size) {
+    @content;
+  }
+}
+@mixin lt-xs() {
+  @media screen and (max-width: $xs-break) {
+    @content;
+  }
+}
+@mixin lt-sm() {
+  @media screen and (max-width: $sm-break) {
+    @content;
+  }
+}
+@mixin lt-md() {
+  @media screen and (max-width: $md-break) {
+    @content;
+  }
+}
+
+// 対象サイズ以上のみ
+// --------------------------------------------------
+@mixin gt-sm() {
+  @media screen and (min-width: $sm-min-size) {
+    @content;
+  }
+}
+@mixin gt-md() {
+  @media screen and (min-width: $md-min-size) {
+    @content;
+  }
+}
+@mixin gt-lg() {
+  @media screen and (min-width: $lg-min-size) {
+    @content;
+  }
+}
+@mixin gt-xl() {
+  @media screen and (min-width: 2000px) {
+    @content;
+  }
+}
+
+// 対象サイズ範囲内のみ（ほぼ使わない）
+// --------------------------------------------------
+@mixin in-xs() {
+  @include ltXS;
+}
+@mixin in-sm() {
+  @media screen and (min-width: $sm-min-size) and (max-width: $sm-break) {
+    @content;
+  }
+}
+@mixin in-md() {
+  @media screen and (min-width: $md-min-size) and (max-width: $md-break) {
+    @content;
+  }
+}
+@mixin in-lg() {
+  @include gt-lg;
+}
+
+// ===========================================
+//  font family
+// ===========================================
+$font-family-base: 'Yu Gothic Medium', '游ゴシック Medium', YuGothic,
+  '游ゴシック体', 'ヒラギノ角ゴ Pro W3', 'メイリオ', sans-serif;
+
+// ===========================================
+// lineheight
+// ===========================================
+$line-height-base: 1.4;
+
+// ===========================================
+// color
+// ===========================================
+$color-base: #252525;
+
+// ===========================================
+// width
+// ===========================================
+$contents-min-width: 1000px;
+
+// ===========================================
+// opacity
+// ===========================================
+$opc-default: 0.6;
+$opc-light: 0.8;
+$opc-heavy: 0.4;
+
+// ===========================================
+// transition
+// ===========================================
+$tst-default: 0.4s;
+$tst-light: 0.2s;
+$tst-heavy: 0.6s;
+
+// ===========================================
+// box-shadow
+// ===========================================
+$box-shadow-default: 0 2px 7px rgba(68, 68, 68, 0.5);
+$box-shadow-default-hover: 0 2px 9px rgba(68, 68, 68, 0.7);

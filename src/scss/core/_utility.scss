@@ -1,0 +1,145 @@
+/* stylelint-disable selector-no-qualifying-type */
+// ===========================================
+// clearfix
+// ===========================================
+.clearfix::after {
+  clear: both;
+  content: '';
+  display: block;
+}
+
+// ===========================================
+// element breakpoint switch
+// ===========================================
+.visible-md {
+  display: block;
+}
+
+.visible-sm {
+  display: none;
+}
+
+.visible-xs {
+  display: none;
+}
+
+@include lt-sm {
+  .visible-md {
+    display: none;
+  }
+
+  .visible-sm {
+    display: block;
+  }
+
+  .visible-xs {
+    display: none;
+  }
+}
+@include lt-xs {
+  .visible-md {
+    display: none;
+  }
+
+  .visible-sm {
+    display: none;
+  }
+
+  .visible-xs {
+    display: block;
+  }
+}
+
+// ===========================================
+// br
+// ===========================================
+br.md {
+  display: inline;
+}
+
+br.sm {
+  display: none;
+}
+
+br.xs {
+  display: none;
+}
+
+@include lt-sm {
+  br.md {
+    display: none;
+  }
+
+  br.sm {
+    display: inline;
+  }
+
+  br.xs {
+    display: none;
+  }
+}
+
+@include lt-xs {
+  br.md {
+    display: none;
+  }
+
+  br.sm {
+    display: none;
+  }
+
+  br.xs {
+    display: inline;
+  }
+}
+
+// ===========================================
+// opacity
+// ===========================================
+.opc0 {
+  opacity: 0;
+}
+
+// ===========================================
+// animation
+// ===========================================
+
+// animate-delay 開始時間
+// ===========================================
+// min:.animate-delay-1 max:.animate-delay-100
+// example .animate-delay-7 => animation-delay: 0.7s
+// @include gtXS {
+//   @for $i from 0 through 100 {
+//     .animate-delay-#{$i}--md {
+//       animation-delay: #{$i * 0.1}s;
+//     }
+//   }
+// }
+
+// @include lt-xs {
+//   @for $i from 0 through 100 {
+//     .animate-delay-#{$i}--xs {
+//       animation-delay: #{$i * 0.1}s;
+//     }
+//   }
+// }
+
+// animate-duration 動作時間
+// ===========================================
+// min:.animate-duration-1 max:.animate-duration-100
+// example .animate-duration-7 => animation-dulation: 0.7s
+// @include gtXS {
+//   @for $i from 0 through 100 {
+//     .animate-duration-#{$i}--md {
+//       animation-duration: #{$i * 0.1}s !important;
+//     }
+//   }
+// }
+
+// @include lt-xs {
+//   @for $i from 0 through 100 {
+//     .animate-duration-#{$i}--xs {
+//       animation-duration: #{$i * 0.1}s !important;
+//     }
+//   }
+// }

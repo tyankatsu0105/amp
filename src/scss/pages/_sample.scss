@@ -1,0 +1,16 @@
+.attention-wrap {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+.attention {
+  color: #333;
+  font-size: 5rem;
+  a {
+    color: rgb(14, 0, 206);
+    display: inline-block;
+    text-decoration: underline;
+  }
+}

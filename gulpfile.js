@@ -1,38 +1,130 @@
 'use strict';
+
+// 各種設定ファイル
+const config = require('./config.json');
+
 const gulp = require('gulp');
-const cache = require('gulp-cached');
-const styleInject = require('gulp-style-inject');
 const browserSync = require('browser-sync').create();
-const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
-const uglify = require('gulp-uglify');
+const changed = require('gulp-changed');
+const cache = require('gulp-cached');
+const progeny = require('gulp-progeny');
+
+// style-inject
+const styleInject = require('gulp-style-inject');
+
+// sass
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+
+// img min
 const imagemin = require('gulp-imagemin');
-const changed  = require('gulp-changed');
-const runSequence = require('run-sequence');
+
+// stylelint
+const stylelint = require('gulp-stylelint');
+
+// prettier
+const prettierPlugin = require('gulp-prettier-plugin');
+
+// // --------------------------------------------
+// // stylelint
+// // --------------------------------------------
+gulp.task('stylelint', () => {
+	return gulp.src(config.scss, { since: gulp.lastRun('stylelint') })
+	.pipe(plumber({
+		// errorHandler: notify.onError('Error: <%= error.message %>')
+	}))
+		.pipe(stylelint({
+			fix: true
+		}))
+		.pipe(gulp.dest(file => file.base));
+});
+
+
+// // --------------------------------------------
+// // prettier scss
+// // --------------------------------------------
+gulp.task("prettier:scss", () => {
+	return gulp.src(config.prettier.scss, { since: gulp.lastRun('prettier:scss') })
+		.pipe(prettierPlugin({
+			// 1行に記述できる文字量　超えると改行する　但し、改行するとエラーになる場合は改行しない
+			printWidth: 80,
+			// タブの際のインデント数
+			tabWidth: 2,
+			// ダブルクォーテーションをシングルクォーテーションに変更 ""->''
+			singleQuote: true,
+			// 配列やオブジェクトなどに使うブラケット（意：カッコ）のスペースを有効にする　有効にするとブラケットにスペースが付く
+			bracketSpacing: true
+		}, {
+			filter: false
+		}))
+		.pipe(gulp.dest(file => file.base))
+});
 
 // --------------------------------------------
-// setting
+// Sass
 // --------------------------------------------
-//wpが起動しているポート番号
-// const WP = 9104;
-const SCSS_FILE = './src/scss/**/*.scss';
-const CSS_FILE = './css/**/*.css';
-const CSS_DEST = './css/';
-const WATCH_FILE = [
-	'./src/*.html'
-];
-const IMG_FILE = './src/img/**/*'
-const IMG_DEST = './img/'
+gulp.task('sass', () => {
+	return gulp.src(config.scss)
+	.pipe(cache('sass'))
+  .pipe(progeny())
+	.pipe(plumber({
+		errorHandler: notify.onError('Error: <%= error.message %>')
+	}))
+		.pipe(sass({
+			outputStyle: 'compressed'
+		}))
+		.pipe(autoprefixer({
+			browsers: ["last 2 versions", "ie >= 9", "Android >= 4", "ios_saf >= 8"],
+			cascade: false
+		}))
+		.pipe(gulp.dest(config.cssDest))
+});
+
+// --------------------------------------------
+// browser-sync
+// --------------------------------------------
+gulp.task('browser-sync', () => {
+	if (config.port) {
+		if (config.connectPhp) {
+			// connect-php使用
+			connectPhp.server({
+				port: config.port,
+				base: './',
+				bin: '/Applications/MAMP/bin/php/php5.6.31/bin/php',
+				ini: '/Applications/MAMP/bin/php/php5.6.31/conf/php.ini'
+			}, () => {
+				browserSync.init({
+					proxy: `localhost:${config.port}`,
+					open: 'external',
+					notify: false,
+				});
+			});
+		} else {
+			// docker mamp xampなど
+			browserSync.init({
+				proxy: `localhost:${config.port}`,
+				open: 'external',
+				notify: false
+			});
+		}
+	} else {
+		// 静的開発環境
+		browserSync.init({
+			server: './',
+			open: 'external',
+			notify: false
+		});
+	}
+});
 
 // --------------------------------------------
 // img min
 // --------------------------------------------
-gulp.task('img-min', function () {
-	return gulp.src(IMG_FILE)
-		.pipe(changed(IMG_DEST))
-		.pipe(plumber())
+gulp.task('img-min', () => {
+	return gulp.src(config.img)
+		.pipe(changed(config.imgDest))
 		.pipe(imagemin([
 			imagemin.gifsicle({
 				interlaced: true,
@@ -55,47 +147,14 @@ gulp.task('img-min', function () {
 					}
 				]
 			})
-		])).pipe(gulp.dest(IMG_DEST))
+		])).pipe(gulp.dest(config.imgDest))
 });
 
 // --------------------------------------------
-// Sass
+// style-inject
 // --------------------------------------------
-gulp.task('sass', function () {
-	return gulp.src([SCSS_FILE])
-		.pipe(plumber({
-			errorHandler: notify.onError('Error: <%= error.message %>')
-		}))
-		.pipe(sass({
-			outputStyle: 'compressed'
-		}))
-		.pipe(autoprefixer())
-		.pipe(cache('sass'))
-		.pipe(gulp.dest(CSS_DEST))
-		.pipe(browserSync.stream());
-});
-
-// --------------------------------------------
-// browser-sync
-// --------------------------------------------
-gulp.task('browser-sync', function () {
-	// ローカル開発環境の場合はこちら
-	// browserSync.init({
-	// 		proxy: 'localhost:' + WP + '/wp-admin',
-	// 		open: 'external',
-	// 		notify: false
-	// });
-	// 静的開発環境の場合はこちら
-	browserSync.init({
-		server: './',
-		open: 'external',
-		notify: false
-	});
-});
-
-
-gulp.task('sIj', function () {
-	gulp.src(WATCH_FILE)
+gulp.task('sIj', () => {
+	return gulp.src(config.watch)
 		.pipe(styleInject({
 			// trueにすると自動でstyleタグが付く
 			encapsulated: false
@@ -103,36 +162,20 @@ gulp.task('sIj', function () {
 		.pipe(gulp.dest('./'));
 });
 
-
 // --------------------------------------------
 // Watch
 // --------------------------------------------
-gulp.task('watch', function () {
-	gulp.watch([WATCH_FILE, CSS_FILE]).on('change', browserSync.reload);
-	gulp.watch([SCSS_FILE], ['sass']);
-	gulp.watch([CSS_FILE, WATCH_FILE], ['sIj']);
+gulp.task('watch', (done) => {
+	gulp.watch([config.watch, config.scss]).on('change', browserSync.reload);
+	gulp.watch([config.watch, `${config.cssDest}*.css`], gulp.series('sIj'));
+	gulp.watch(config.scss, gulp.series('stylelint','prettier:scss', 'sass'));
+	gulp.watch(config.img, gulp.series('img-min'));
+	done();
 });
 
 // --------------------------------------------
 // command
 // --------------------------------------------
-gulp.task('default', function (callback) {
-	return runSequence(
-		'browser-sync',
-		'sass',
-		'sIj',
-		'watch',
-		callback
-	);
-});
-
-// 製品化
-// --------------------------------------------
-gulp.task('product', function (callback) {
-	return runSequence(
-		'img-min',
-		'sass',
-		'sIj',
-		callback
-	);
-});
+gulp.task('default',
+	gulp.parallel('browser-sync', 'watch')
+);

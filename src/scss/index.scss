@@ -1,19 +1,43 @@
 // ===========================================
+// vendor
+// ===========================================
+@import 'vendor/animate.css/animate';
+@import 'vendor/fontawesome/fontawesome';
+
+// ===========================================
 // core
 // ===========================================
-// normalize.css
-@import 'core/_normalize';
+// 変数定義
+@import 'core/variables';
 
-.default{
-  padding: 10px;
-  background-color: red;
-  color: #fff;
-  font-size: 20px;
-}
-.active{
-  padding: 10px;
-  background-color: purple;
-  color: #fff;
-  font-weight: bold;
-  font: 30px;
-}
+// minireset.css https://jgthms.com/minireset.css/
+@import 'core/reset';
+
+// 全体のベース
+@import 'core/base';
+
+// 汎用スタイル
+@import 'core/utility';
+
+// ===========================================
+// modules
+// ===========================================
+@import 'modules/sample';
+
+// ===========================================
+// layout
+// ===========================================
+@import 'layout/footer';
+@import 'layout/header';
+@import 'layout/main';
+@import 'layout/sidebar';
+
+// ===========================================
+// components
+// ===========================================
+@import 'components/sample';
+
+// ===========================================
+// pages
+// ===========================================
+@import 'pages/sample';

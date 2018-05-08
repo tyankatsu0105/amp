@@ -1,0 +1,40 @@
+:root {
+  font-size: 10px;
+
+  @include lt-xs {
+    font-size: 8px;
+  }
+}
+
+body {
+  background-color: #fff;
+  color: $color-base;
+  font-family: $font-family-base;
+  line-height: $line-height-base;
+  -webkit-text-size-adjust: 100%; //stylelint-disable-line property-no-vendor-prefix
+  -moz-text-size-adjust: 100%; //stylelint-disable-line property-no-vendor-prefix
+  -ms-text-size-adjust: 100%; //stylelint-disable-line property-no-vendor-prefix
+}
+
+a {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+  transition: opacity $tst-default, transform $tst-default;
+}
+
+img {
+  // 変化時のカクつき防止
+  backface-visibility: hidden;
+  // img下の隙間を埋める
+  vertical-align: middle;
+}
+
+button {
+  transition: opacity $tst-default, transform $tst-default;
+}
+
+// animate.cssのアニメーション時間を変更
+.animated {
+  animation-duration: $tst-default;
+}

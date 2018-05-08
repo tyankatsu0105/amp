@@ -1,0 +1,59 @@
+
+
+# ==== Format ====
+# prefix(scope): :emoji: Commit body...
+#
+# backlog task key
+
+# ==== prefix ====
+# fix: バグやタイポなどの修正
+# feat: 新しい機能の追加
+# refactor: リファクタリング
+# style: スタイリングに関わる変更(css/sass)
+# chore: 細務(ファイル整備、移動、削除、名前変更など)
+# test: テストファイルに対する変更や修正
+# docs: ドキュメントの加筆や修正
+# breaking: 破壊的変更
+# build: ビルド周りの設定(主にgulpやwebpack周り)
+# ci: CIに関わる設定
+# pref: パフォーマンスの改善
+# revert: 削除や変更の取り消し
+# other: その他
+
+# ==== scope ====
+# eslint | eslint の設定を変更
+# stylelint | stylelint の設定を変更
+# config | config.json を変更
+# readme | README.md を変更
+# gulp | gulp の設定を変更
+# html | htmlファイル変更
+# php | phpファイル変更
+# various | 共通の目的のために複数ファイル変更
+
+# ==== Emojis ====
+# 🐛  :bug: バグの修正
+# 🎉  :tada: 新機能の実装
+# 👍  :+1: 機能改善
+# 💊  :pill: 機能修正
+# 💉  :syringe: linterの設定やエラー修正
+# 🔥  :fire: 不要ファイルの削除
+# 🚚  :truck: ファイル移動
+# 📛  :name: ファイル名変更
+# 📝  :memo: markdownファイルの変更
+# 📑  :bookmark: タグ切り(リリース)
+# 👮  :cop: 認証周り
+# ✅  :white_check_mark: テストの作成
+# 💚  :green_heart: テストの修正
+# 🆙  :up: モジュールのバージョンアップ
+# 👻  :ghost: 作業途中
+
+# ==== 7つのルール ====
+# 1. タイトルの後は1行空けて本文を書く
+# 2. タイトルを50字以内におさめる
+# 3. タイトルの文頭を大文字にする
+# 4. タイトルの文末にピリオドを付けない
+# 5. タイトルは命令形で記述する
+# 6. 本文は1行あたり72字以内におさめる
+# 7. 本文ではどのようにではなく何をとなぜを説明する
+#
+# 詳細は https://postd.cc/how-to-write-a-git-commit-message/
